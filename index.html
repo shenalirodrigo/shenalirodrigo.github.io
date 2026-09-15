@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Brush Strokes by Sheniii — Original Art</title>
+<meta name="description" content="Brush Strokes by Sheniii — original contemporary paintings and artworks.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+:root {
+  --ink:#171513; --muted:#716b64; --paper:#f6f2eb; --line:#ded6ca; --gold:#a47a38;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Arial,sans-serif;font-weight:300}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:22px 5vw;background:rgba(246,242,235,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(222,214,202,.65)}
+.logo{font-family:"Cormorant Garamond",serif;font-size:27px;letter-spacing:.05em}
+.navlinks{display:flex;gap:28px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:110px 5vw 70px;gap:7vw}
+.hero-copy{max-width:620px}
+.eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+h1{font-family:"Cormorant Garamond",serif;font-size:clamp(60px,8vw,118px);font-weight:400;line-height:.83;margin:0 0 30px;letter-spacing:-.03em}
+.hero-copy p{font-size:16px;line-height:1.8;max-width:470px;color:var(--muted)}
+.cta{display:inline-flex;margin-top:22px;padding:14px 24px;border:1px solid var(--ink);font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:.25s}
+.cta:hover{background:var(--ink);color:white}
+.hero-art{height:78vh;min-height:540px;position:relative;display:flex;align-items:center;justify-content:center}
+.hero-art img{width:100%;height:100%;object-fit:cover;box-shadow:0 25px 70px rgba(30,20,10,.16)}
+.section{padding:110px 5vw}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:45px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.section-head h2{font-family:"Cormorant Garamond",serif;font-size:55px;font-weight:400;margin:0}
+.section-head p{color:var(--muted);font-size:13px;max-width:360px;line-height:1.7;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:45px 24px}
+.work-card{min-width:0}
+.art-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.art-open img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;transition:transform .5s}
+.work-card:nth-child(3n+2) .art-open img{aspect-ratio:5/4}
+.art-open:hover img{transform:scale(1.015)}
+.work-meta{display:flex;justify-content:space-between;gap:15px;padding-top:13px;border-bottom:1px solid var(--line);padding-bottom:14px}
+.work-meta h3{font-family:"Cormorant Garamond",serif;font-size:23px;font-weight:500;margin:0}
+.work-meta span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:5px}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:7vw;align-items:center;background:#ebe4d9}
+.feature img{width:100%;max-height:700px;object-fit:cover}
+.feature h2{font-family:"Cormorant Garamond",serif;font-size:62px;font-weight:400;line-height:.95;margin:0 0 25px}
+.feature p{color:var(--muted);line-height:1.9;max-width:500px}
+.about{display:grid;grid-template-columns:.7fr 1.3fr;gap:9vw;align-items:center}
+.about img{width:100%;max-height:650px;object-fit:cover;object-position:center}
+.about h2{font-family:"Cormorant Garamond",serif;font-size:64px;font-weight:400;margin:0 0 25px}
+.about p{font-size:15px;line-height:1.95;color:var(--muted);max-width:620px}
+.contact{text-align:center;padding:130px 5vw}
+.contact h2{font-family:"Cormorant Garamond",serif;font-size:75px;font-weight:400;margin:0 0 15px}
+.contact p{color:var(--muted);line-height:1.8}
+.contact-links{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:35px;font-size:12px;letter-spacing:.13em;text-transform:uppercase}
+.contact-links a{border-bottom:1px solid var(--ink);padding-bottom:5px}
+footer{padding:30px 5vw;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.modal{position:fixed;inset:0;background:rgba(12,10,8,.9);z-index:50;display:none;align-items:center;justify-content:center;padding:5vw}
+.modal.show{display:flex}
+.modal img{max-width:92vw;max-height:88vh;object-fit:contain}
+.close{position:absolute;top:22px;right:30px;color:white;background:none;border:0;font-size:35px;cursor:pointer}
+@media(max-width:850px){
+ .navlinks{gap:12px;font-size:9px} .logo{font-size:22px}
+ .hero,.feature,.about{grid-template-columns:1fr} .hero{padding-top:120px}
+ .hero-art{height:65vh;min-height:400px} .grid{grid-template-columns:1fr 1fr}
+ .section-head{display:block} .section-head p{margin-top:15px}
+}
+@media(max-width:560px){
+ .nav{padding:17px 5vw} .navlinks a:nth-child(3){display:none}
+ .hero{padding:100px 5vw 55px} h1{font-size:64px}
+ .grid{grid-template-columns:1fr} .section,.contact{padding:75px 5vw}
+ .section-head h2,.about h2,.feature h2{font-size:48px}
+ .contact h2{font-size:55px} footer{display:block;line-height:2}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="logo" href="#top">Brush Strokes by Sheniii</a>
+  <nav class="navlinks">
+    <a href="#collection">Collection</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">Original Paintings · Contemporary Art</div>
+    <h1>Art that<br>lives with<br>you.</h1>
+    <p>Original artworks created to bring atmosphere, emotion and character into the spaces we inhabit.</p>
+    <a class="cta" href="#collection">Explore the collection</a>
+  </div>
+  <div class="hero-art">
+    <img src="images/art-01.jpeg" alt="Golden Silhouettes">
+  </div>
+</section>
+
+<section class="section" id="collection">
+  <div class="section-head">
+    <h2>Selected Works</h2>
+    <p>A collection of original paintings spanning expressive figures, abstract landscapes, movement and contemporary interiors.</p>
+  </div>
+  <div class="grid">
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-01.jpeg" data-title="Golden Silhouettes" aria-label="View Golden Silhouettes">
+          <img src="images/art-01.jpeg" alt="Golden Silhouettes" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Golden Silhouettes</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-02.jpeg" data-title="The Hands" aria-label="View The Hands">
+          <img src="images/art-02.jpeg" alt="The Hands" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>The Hands</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-03.jpeg" data-title="Golden Current" aria-label="View Golden Current">
+          <img src="images/art-03.jpeg" alt="Golden Current" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Golden Current</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-04.jpeg" data-title="City After Dark" aria-label="View City After Dark">
+          <img src="images/art-04.jpeg" alt="City After Dark" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>City After Dark</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-05.jpeg" data-title="Quiet Valley" aria-label="View Quiet Valley">
+          <img src="images/art-05.jpeg" alt="Quiet Valley" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Quiet Valley</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-06.jpeg" data-title="The Woman with the Vessel" aria-label="View The Woman with the Vessel">
+          <img src="images/art-06.jpeg" alt="The Woman with the Vessel" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>The Woman with the Vessel</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-07.jpeg" data-title="Coastal Figures" aria-label="View Coastal Figures">
+          <img src="images/art-07.jpeg" alt="Coastal Figures" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Coastal Figures</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-08.jpeg" data-title="Flight" aria-label="View Flight">
+          <img src="images/art-08.jpeg" alt="Flight" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Flight</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-09.jpeg" data-title="Three Horses" aria-label="View Three Horses">
+          <img src="images/art-09.jpeg" alt="Three Horses" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Three Horses</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-10.png" data-title="Turquoise &amp; Gold" aria-label="View Turquoise &amp; Gold">
+          <img src="images/art-10.png" alt="Turquoise &amp; Gold" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Turquoise &amp; Gold</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-11.png" data-title="Reflections" aria-label="View Reflections">
+          <img src="images/art-11.png" alt="Reflections" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Reflections</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-12.png" data-title="Abstract Horizon" aria-label="View Abstract Horizon">
+          <img src="images/art-12.png" alt="Abstract Horizon" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Abstract Horizon</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    
+
+      <article class="work-card">
+        <button class="art-open" data-src="images/art-13.png" data-title="Earth &amp; Sky" aria-label="View Earth &amp; Sky">
+          <img src="images/art-13.png" alt="Earth &amp; Sky" loading="lazy">
+        </button>
+        <div class="work-meta">
+          <h3>Earth &amp; Sky</h3>
+          <span>Original artwork</span>
+        </div>
+      </article>
+    </div>
+</section>
+
+<section class="section feature">
+  <div><img src="images/art-10.png" alt="Featured artwork"></div>
+  <div>
+    <div class="eyebrow">Art for the space</div>
+    <h2>Made to become part of the room.</h2>
+    <p>Art changes the atmosphere of a space. Each work is created not only to be viewed, but to become part of the feeling, character and story of the place where it lives.</p>
+    <a class="cta" href="#contact">Enquire about a work</a>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div><img src="images/artist.jpg" alt="Sheniii, artist behind Brush Strokes by Sheniii"></div>
+  <div>
+    <div class="eyebrow">The Artist</div>
+    <h2>Brush Strokes by Sheniii</h2>
+    <p>Brush Strokes by Sheniii is an independent art practice focused on original contemporary paintings that explore emotion, movement, atmosphere and the beauty of contrast.</p>
+    <p>From expressive silhouettes and equestrian forms to textured abstracts and atmospheric landscapes, each work is created to hold its own presence while living naturally within a space.</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="eyebrow">Commissions · Purchases · Collaborations</div>
+  <h2>Let's talk about art.</h2>
+  <p>For available works, commissions or collaborations, get in touch directly.</p>
+  <div class="contact-links">
+    <a href="https://wa.me/94718369949" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="tel:+94777533971">077 753 3971</a>
+    <a href="https://instagram.com/Brushstrokes_By_Sheniii" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <span>© 2026 Brush Strokes by Sheniii</span>
+  <span>Original Art · Sri Lanka</span>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <button class="close" aria-label="Close">×</button>
+  <img id="modalImg" src="" alt="">
+</div>
+
+<script>
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modalImg');
+document.querySelectorAll('.art-open').forEach(btn => btn.addEventListener('click', () => {
+  modalImg.src = btn.dataset.src;
+  modalImg.alt = btn.dataset.title;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+}));
+document.querySelector('.close').addEventListener('click', closeModal);
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+function closeModal() { modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); modalImg.src=''; }
+</script>
+</body>
+</html>
