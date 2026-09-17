@@ -105,25 +105,22 @@ const series3Data=[
 const series3=series3Data;
 const commissionImages=[3,4,6,9,12,14,17,18,21,22,23,25,28,29,30,31,32,33,35,37,38,39,40,42,43,44,46,47,48,49,50,51,52,53,54,55,57,58,59,60,62,64,66,67,68,69,71,73,75,76,77,78,80,81,82];
 const commissionGroups=[
-['08 September 2026',[64],[]],
-['05 September 2026',[71],[]],
-['24 July 2026',[66,67,68,69],[]],
-['25 August 2025 & 18 July 2026 · combined catalogue section',[13,15],['Golden Way','Down South 2']],
-['11 July 2026 · Group 1',[75,76,77,78],[]],
-['11 July 2026 · Group 2',[80,81,82],[]],
-['15 June 2026',[62],[]],
-['28 April 2026',[57,58,59,60],[]],
-['17 March 2026',[35],[]],
-['01 March 2026',[46,47,48,49,50,51,52,53,54,55],[]],
-['21 January 2026',[42,43,44],[]],
-['26 October 2025',[28,29,30,31,32,33],[]],
-['06 October 2025',[73],[]],
-['02 October 2025',[25,26],[]],
-['28 September 2025',[21,22,23],['The Jazz Night']],
-['07 September 2025',[37,38,39,40],[]],
-['30 August 2025',[2,5,7],['The Reach','Back Beauty','The Tusker']],
-['26 August 2025',[17,18],[]],
-['15 August 2025',[10],['The Game']]
+  ['08 September 2026',[64],[]],
+  ['05 September 2026',[71],[]],
+  ['24 July 2026',[66,67,68,69],[]],
+  ['11 July 2026 · Group 1',[75,76,77,78],[]],
+  ['11 July 2026 · Group 2',[80,81,82],[]],
+  ['15 June 2026',[62],[]],
+  ['28 April 2026',[57,58,59,60],[]],
+  ['17 March 2026',[35],[]],
+  ['01 March 2026',[46,47,48,49,50,51,52,53,54,55],[]],
+  ['21 January 2026',[42,43,44],[]],
+  ['26 October 2025',[28,29,30,31,32,33],[]],
+  ['06 October 2025',[73],[]],
+  ['02 October 2025',[25],[]],
+  ['28 September 2025',[21,22,23],['The Jazz Night']],
+  ['07 September 2025',[37,38,39,40],[]],
+  ['26 August 2025',[17,18],[]]
 ];
 function card(item,index,kind='art'){const [title,year,size,price,img,medium,desc]=item; const small=size&&(/cm/i.test(size)&&!/[3-9]\s*ft/i.test(size)); return `<article class="art-card" data-year="${year}" data-small="${small}" onclick='openModal(${JSON.stringify(item)})'><div class="art-img"><img src="./${img}" alt="${title}"></div><div class="art-info"><h3>${title}</h3><div class="art-meta">${year||''}${year&&medium?' · ':''}${medium||''}</div>${size?`<div class="art-meta">${size}</div>`:''}${price?`<div class="price">${price}</div>`:''}</div></article>`}
 function renderGrid(id,data){document.getElementById(id).innerHTML=data.map((x,i)=>card(x,i)).join('')}
