@@ -128,7 +128,27 @@ const commissionGroups=[
 function card(item,index,kind='art'){const [title,year,size,price,img,medium,desc]=item; const small=size&&(/cm/i.test(size)&&!/[3-9]\s*ft/i.test(size)); return `<article class="art-card" data-year="${year}" data-small="${small}" onclick='openModal(${JSON.stringify(item)})'><div class="art-img"><img src="./${img}" alt="${title}"></div><div class="art-info"><h3>${title}</h3><div class="art-meta">${year||''}${year&&medium?' · ':''}${medium||''}</div>${size?`<div class="art-meta">${size}</div>`:''}${price?`<div class="price">${price}</div>`:''}</div></article>`}
 function renderGrid(id,data){document.getElementById(id).innerHTML=data.map((x,i)=>card(x,i)).join('')}
 renderGrid('availableGrid',available);renderGrid('legendsGrid',series1);renderGrid('silentGrid',series2);renderGrid('littleGrid',series3);
-function renderCommissions(){const el=document.getElementById('commissionGroups');el.innerHTML=commissionGroups.map((g,gi)=>`<div class="commission-group"><div class="date-title"><h3>${g[0]}</h3></div><div class="commission-grid">${g[1].map((p,i)=>{const title=g[2][i]||'Commissioned Artwork';const img=(title==='Golden Way')?'./golden-way.jpg':(title==='Down South 2')?'./down-south-2.jpg':`./assets/commissions/${p}.jpg`;return `<article class="art-card" onclick='openModal(${JSON.stringify([title,'', '', '',`IMGPLACEHOLDER`,'Commissioned work','Commission date: '+g[0]]).replace('IMGPLACEHOLDER', '${img}')})'><div class="art-img"><img src="${img}" alt="${title}"></div><div class="art-info"><div class="art-meta">${title}</div></div></article>`}).join('')}</div></div>`).join('')}
+function renderCommissions(){
+  const el=document.getElementById('commissionGroups');
+  el.innerHTML=commissionGroups.map(g=>{
+    return `<div class="commission-group">
+      <div class="date-title"><h3>${g[0]}</h3></div>
+      <div class="commission-grid">
+        ${g[1].map((p,i)=>{
+          const title=g[2][i]||'Commissioned Artwork';
+          const img=(title==='Golden Way')?'./golden-way.jpg':
+                    (title==='Down South 2')?'./down-south-2.jpg':
+                    `./assets/commissions/${p}.jpg`;
+          const item=[title,'','','',img,'Commissioned work','Commission date: '+g[0]];
+          return `<article class="art-card" onclick='openModal(${JSON.stringify(item)})'>
+            <div class="art-img"><img src="${img}" alt="${title}"></div>
+            <div class="art-info"><div class="art-meta">${title}</div></div>
+          </article>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}el.innerHTML=commissionGroups.map((g,gi)=>`<div class="commission-group"><div class="date-title"><h3>${g[0]}</h3></div><div class="commission-grid">${g[1].map((p,i)=>{const title=g[2][i]||'Commissioned Artwork';const img=(title==='Golden Way')?'./golden-way.jpg':(title==='Down South 2')?'./down-south-2.jpg':`./assets/commissions/${p}.jpg`;return `<article class="art-card" onclick='openModal(${JSON.stringify([title,'', '', '',`IMGPLACEHOLDER`,'Commissioned work','Commission date: '+g[0]]).replace('IMGPLACEHOLDER', '${img}')})'><div class="art-img"><img src="${img}" alt="${title}"></div><div class="art-info"><div class="art-meta">${title}</div></div></article>`}).join('')}</div></div>`).join('')}
 renderCommissions();
 function openModal(item){document.getElementById('modalImg').src=item[4];document.getElementById('modalImg').alt=item[0];document.getElementById('modalKicker').textContent=item[5]||'Original artwork';document.getElementById('modalTitle').textContent=item[0];document.getElementById('modalDetails').innerHTML=[[item[1]?'Year':'',item[1]],[item[2]?'Size':'',item[2]],[item[3]?'Price':'',item[3]]].filter(x=>x[0]).map(x=>`<div><strong>${x[0]}</strong><br>${x[1]}</div>`).join('');document.getElementById('modalDesc').textContent=item[6]||'';document.getElementById('modalWa').href=`https://wa.me/${wa}?text=${encodeURIComponent('Hi Sheniii, I am interested in “'+item[0]+'”.')}`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
