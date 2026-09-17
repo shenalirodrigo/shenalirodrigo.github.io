@@ -130,10 +130,46 @@ function renderGrid(id,data){document.getElementById(id).innerHTML=data.map((x,i
 renderGrid('availableGrid',available);renderGrid('legendsGrid',series1);renderGrid('silentGrid',series2);renderGrid('littleGrid',series3);
 function renderCommissions(){
   const el=document.getElementById('commissionGroups');
+
   el.innerHTML=commissionGroups.map(g=>{
-    return `<div class="commission-group">
-      <div class="date-title"><h3>${g[0]}</h3></div>
-      <div class="commission-grid">
+    const cards=g[1].map((p,i)=>{
+      const title=g[2][i]||'Commissioned Artwork';
+      const img=`/assets/commissions/${p}.jpg`;
+
+      return `
+        <article class="art-card" onclick='openModal(${JSON.stringify([
+          title,
+          '',
+          '',
+          '',
+          img,
+          'Commissioned work',
+          'Commission date: '+g[0]
+        ])})'>
+          <div class="art-img">
+            <img src="${img}" alt="${title}">
+          </div>
+          <div class="art-info">
+            <div class="art-meta">${title}</div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    return `
+      <div class="commission-group">
+        <div class="date-title">
+          <h3>${g[0]}</h3>
+        </div>
+        <div class="commission-grid">
+          ${cards}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+renderCommissions();
         ${g[1].map((p,i)=>{
           const title=g[2][i]||'Commissioned Artwork';
           const img=(title==='Golden Way')?'./golden-way.jpg':
