@@ -129,63 +129,37 @@ function card(item,index,kind='art'){const [title,year,size,price,img,medium,des
 function renderGrid(id,data){document.getElementById(id).innerHTML=data.map((x,i)=>card(x,i)).join('')}
 renderGrid('availableGrid',available);renderGrid('legendsGrid',series1);renderGrid('silentGrid',series2);renderGrid('littleGrid',series3);
 function renderCommissions(){
-  const el=document.getElementById('commissionGroups');
+  const el = document.getElementById('commissionGroups');
 
-  el.innerHTML=commissionGroups.map(g=>{
-    const cards=g[1].map((p,i)=>{
-      const title=g[2][i]||'Commissioned Artwork';
-      const img=`/assets/commissions/${p}.jpg`;
+  el.innerHTML = commissionGroups.map(function(g){
+    let cards = g[1].map(function(p, i){
+      let title = g[2][i] || 'Commissioned Artwork';
+      let img = './assets/commissions/' + p + '.jpg';
 
-      return `
-        <article class="art-card" onclick='openModal(${JSON.stringify([
-          title,
-          '',
-          '',
-          '',
-          img,
-          'Commissioned work',
-          'Commission date: '+g[0]
-        ])})'>
-          <div class="art-img">
-            <img src="${img}" alt="${title}">
-          </div>
-          <div class="art-info">
-            <div class="art-meta">${title}</div>
-          </div>
-        </article>
-      `;
+      return '<article class="art-card">' +
+        '<div class="art-img">' +
+          '<img src="' + img + '" alt="' + title + '">' +
+        '</div>' +
+        '<div class="art-info">' +
+          '<div class="art-meta">' + title + '</div>' +
+        '</div>' +
+      '</article>';
     }).join('');
 
-    return `
-      <div class="commission-group">
-        <div class="date-title">
-          <h3>${g[0]}</h3>
-        </div>
-        <div class="commission-grid">
-          ${cards}
-        </div>
-      </div>
-    `;
+    return '<div class="commission-group">' +
+      '<div class="date-title">' +
+        '<h3>' + g[0] + '</h3>' +
+      '</div>' +
+      '<div class="commission-grid">' +
+        cards +
+      '</div>' +
+    '</div>';
   }).join('');
 }
 
 renderCommissions();
-        ${g[1].map((p,i)=>{
-          const title=g[2][i]||'Commissioned Artwork';
-          const img=(title==='Golden Way')?'./golden-way.jpg':
-                    (title==='Down South 2')?'./down-south-2.jpg':
-                    `./assets/commissions/${p}.jpg`;
-          const item=[title,'','','',img,'Commissioned work','Commission date: '+g[0]];
-          return `<article class="art-card" onclick='openModal(${JSON.stringify(item)})'>
-            <div class="art-img"><img src="${img}" alt="${title}"></div>
-            <div class="art-info"><div class="art-meta">${title}</div></div>
-          </article>`;
-        }).join('')}
-      </div>
-    </div>`;
-  }).join('');
-}el.innerHTML=commissionGroups.map((g,gi)=>`<div class="commission-group"><div class="date-title"><h3>${g[0]}</h3></div><div class="commission-grid">${g[1].map((p,i)=>{const title=g[2][i]||'Commissioned Artwork';const img=(title==='Golden Way')?'./golden-way.jpg':(title==='Down South 2')?'./down-south-2.jpg':`./assets/commissions/${p}.jpg`;return `<article class="art-card" onclick='openModal(${JSON.stringify([title,'', '', '',`IMGPLACEHOLDER`,'Commissioned work','Commission date: '+g[0]]).replace('IMGPLACEHOLDER', '${img}')})'><div class="art-img"><img src="${img}" alt="${title}"></div><div class="art-info"><div class="art-meta">${title}</div></div></article>`}).join('')}</div></div>`).join('')}
-renderCommissions();
+        
+
 function openModal(item){document.getElementById('modalImg').src=item[4];document.getElementById('modalImg').alt=item[0];document.getElementById('modalKicker').textContent=item[5]||'Original artwork';document.getElementById('modalTitle').textContent=item[0];document.getElementById('modalDetails').innerHTML=[[item[1]?'Year':'',item[1]],[item[2]?'Size':'',item[2]],[item[3]?'Price':'',item[3]]].filter(x=>x[0]).map(x=>`<div><strong>${x[0]}</strong><br>${x[1]}</div>`).join('');document.getElementById('modalDesc').textContent=item[6]||'';document.getElementById('modalWa').href=`https://wa.me/${wa}?text=${encodeURIComponent('Hi Sheniii, I am interested in “'+item[0]+'”.')}`;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.querySelectorAll('.filter').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const f=btn.dataset.filter;document.querySelectorAll('#availableGrid .art-card').forEach(c=>{let show=f==='all'||(f==='small'?c.dataset.small==='true':c.dataset.year===f);c.style.display=show?'':'none'})}));
